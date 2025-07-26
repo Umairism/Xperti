@@ -1,51 +1,55 @@
 import React from 'react';
 import { Activity, Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
-const Footer = () => {
+interface FooterProps {
+  setCurrentPage: (page: string) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
   const footerSections = [
     {
       title: 'Products',
       links: [
-        { name: 'Ultrasound Equipment', href: '#' },
-        { name: 'CT Scanners', href: '#' },
-        { name: 'X-Ray Machines', href: '#' },
-        { name: 'Digital Radiography', href: '#' }
+        { name: 'Medical Equipment', action: () => setCurrentPage('products') },
+        { name: 'Ultrasound Systems', action: () => setCurrentPage('products') },
+        { name: 'Diagnostic Equipment', action: () => setCurrentPage('products') },
+        { name: 'Digital Radiography', action: () => setCurrentPage('products') }
       ]
     },
     {
       title: 'Services',
       links: [
-        { name: 'Equipment Sales', href: '#' },
-        { name: 'Maintenance & Repair', href: '#' },
-        { name: 'Installation Services', href: '#' },
-        { name: 'Technical Support', href: '#' }
+        { name: 'Equipment Sales', action: () => setCurrentPage('products') },
+        { name: 'Maintenance & Repair', action: () => setCurrentPage('spareparts') },
+        { name: 'Installation Services', action: () => setCurrentPage('spareparts') },
+        { name: 'Technical Support', action: () => setCurrentPage('contact') }
       ]
     },
     {
       title: 'Company',
       links: [
-        { name: 'About Us', href: '#' },
-        { name: 'Our Projects', href: '#' },
-        { name: 'Careers', href: '#' },
-        { name: 'News & Updates', href: '#' }
+        { name: 'About Us', action: () => setCurrentPage('about') },
+        { name: 'Our Projects', action: () => setCurrentPage('projects') },
+        { name: 'Customer Feedback', action: () => setCurrentPage('feedback') },
+        { name: 'Contact Us', action: () => setCurrentPage('contact') }
       ]
     },
     {
       title: 'Support',
       links: [
-        { name: 'Contact Us', href: '#' },
-        { name: 'Customer Portal', href: '#' },
-        { name: 'Documentation', href: '#' },
-        { name: 'Warranty Info', href: '#' }
+        { name: 'Contact Us', action: () => setCurrentPage('contact') },
+        { name: 'Spare Parts', action: () => setCurrentPage('spareparts') },
+        { name: 'Documentation', href: '/docs' },
+        { name: 'Warranty Info', href: '/warranty' }
       ]
     }
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Instagram, href: '#', label: 'Instagram' }
+    { icon: Facebook, href: 'https://facebook.com/xperti', label: 'Facebook' },
+    { icon: Twitter, href: 'https://twitter.com/xperti', label: 'Twitter' },
+    { icon: Linkedin, href: 'https://linkedin.com/company/xperti', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://instagram.com/xperti', label: 'Instagram' }
   ];
 
   return (
@@ -95,12 +99,23 @@ const Footer = () => {
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a
-                      href={link.href}
-                      className="text-gray-300 hover:text-blue-400 transition-colors duration-300"
-                    >
-                      {link.name}
-                    </a>
+                    {link.action ? (
+                      <button
+                        onClick={link.action}
+                        className="text-gray-300 hover:text-blue-400 transition-colors duration-300 text-left"
+                      >
+                        {link.name}
+                      </button>
+                    ) : (
+                      <a
+                        href={link.href}
+                        target={link.href?.startsWith('http') ? '_blank' : undefined}
+                        rel={link.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="text-gray-300 hover:text-blue-400 transition-colors duration-300"
+                      >
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -117,7 +132,9 @@ const Footer = () => {
               </div>
               <div>
                 <p className="text-gray-400 text-sm">Call Us</p>
-                <p className="text-white font-semibold">+1 (555) 123-4567</p>
+                <a href="tel:+15551234567" className="text-white font-semibold hover:text-blue-400 transition-colors">
+                  +1 (555) 123-4567
+                </a>
               </div>
             </div>
             
@@ -127,7 +144,9 @@ const Footer = () => {
               </div>
               <div>
                 <p className="text-gray-400 text-sm">Email Us</p>
-                <p className="text-white font-semibold">info@xperti.com</p>
+                <a href="mailto:info@xperti.com" className="text-white font-semibold hover:text-blue-400 transition-colors">
+                  info@xperti.com
+                </a>
               </div>
             </div>
             
@@ -151,16 +170,16 @@ const Footer = () => {
             </div>
             
             <div className="flex flex-wrap gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+              <a href="/privacy-policy" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+              <a href="/terms-of-service" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+              <a href="/cookie-policy" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
                 Cookie Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+              <a href="/accessibility" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
                 Accessibility
               </a>
             </div>

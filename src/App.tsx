@@ -35,11 +35,11 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage />;
+        return <HomePage setCurrentPage={setCurrentPage} />;
       case 'about':
         return <AboutPage />;
       case 'products':
-        return <ProductsPage />;
+        return <ProductsPage setCurrentPage={setCurrentPage} />;
       case 'spareparts':
         return <SparePartsPage />;
       case 'projects':
@@ -49,7 +49,7 @@ function App() {
       case 'contact':
         return <ContactPage />;
       default:
-        return <HomePage />;
+        return <HomePage setCurrentPage={setCurrentPage} />;
     }
   };
 
@@ -57,7 +57,7 @@ function App() {
     <div className={`min-h-screen transition-colors duration-300 ${
       isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'
     }`}>
-      <Header />
+      <Header setCurrentPage={setCurrentPage} />
       <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
       
       {/* Theme Toggle Button */}
@@ -79,7 +79,7 @@ function App() {
         {renderPage()}
       </main>
       
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }

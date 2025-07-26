@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { MonitorSpeaker, Stethoscope, Zap, Search, Filter, Star } from 'lucide-react';
 
-const ProductsPage = () => {
+interface ProductsPageProps {
+  setCurrentPage?: (page: string) => void;
+}
+
+const ProductsPage: React.FC<ProductsPageProps> = ({ setCurrentPage }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -166,7 +170,10 @@ const ProductsPage = () => {
                 
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-bold text-blue-600">{product.price}</div>
-                  <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                  <button 
+                    onClick={() => setCurrentPage?.('contact')}
+                    className="px-6 py-2 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                  >
                     Get Quote
                   </button>
                 </div>
@@ -200,7 +207,10 @@ const ProductsPage = () => {
           <p className="text-lg text-blue-100 mb-8">
             Our experts are here to help you find the perfect medical equipment solution for your facility.
           </p>
-          <button className="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
+          <button 
+            onClick={() => setCurrentPage?.('contact')}
+            className="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
+          >
             Consult Our Experts
           </button>
         </div>

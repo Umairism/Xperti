@@ -1,7 +1,11 @@
 import React from 'react';
 import { Award, Users, Wrench, Globe, ArrowRight, CheckCircle } from 'lucide-react';
 
-const HomePage = () => {
+interface HomePageProps {
+  setCurrentPage: (page: string) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
   const stats = [
     { icon: Award, value: '15+', label: 'Years Experience' },
     { icon: Users, value: '500+', label: 'Happy Clients' },
@@ -83,7 +87,10 @@ const HomePage = () => {
                   </li>
                 ))}
               </ul>
-              <button className="mt-6 flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-semibold">
+              <button 
+                onClick={() => setCurrentPage('about')}
+                className="mt-6 flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-semibold"
+              >
                 <span>Learn More</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -102,10 +109,16 @@ const HomePage = () => {
             Contact us today for a free consultation and discover how we can help improve your healthcare facility.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+            <button 
+              onClick={() => setCurrentPage('contact')}
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            >
               Get Free Quote
             </button>
-            <button className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-300">
+            <button 
+              onClick={() => setCurrentPage('products')}
+              className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-300"
+            >
               View Products
             </button>
           </div>
